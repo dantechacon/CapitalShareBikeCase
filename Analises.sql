@@ -82,13 +82,13 @@ FROM capital_share_bike_case
 GROUP BY season_name, weather_condition, holiday, workingday -- agrupando os resultados por estação do ano, condição climática, feriado e dia útil
 ORDER BY avg_total_rentals DESC;   -- ordenando os resultados pela média total de aluguéis, em desc
 
-/* Disclaimer: podemos assumir os valores dos campos de holday, e workingday, como 1 sendo que sim, é um holiday ou workday, mas também é possível replicar as mesmas visualizações trazidas acima - que envolvem esses campos - assumindo que 0 é equivalente a true, e 1 é equivalente a false. Sendo o segundo caso, trago uma cláusula de WHERE em que ou é feriado ou dia útil */
+/* Disclaimer: assumindo os valores dos campos de holday, e workingday, como 1 sendo que sim, é um holiday ou workday, mas também é possível replicar as mesmas visualizações trazidas acima - que envolvem esses campos - assumindo que 0 é equivalente a true, e 1 é equivalente a false. Sendo qualquer um dos casos, trago uma cláusula de WHERE em que ou é feriado ou dia útil */
 SELECT 
 -- Outros campos podem ser trazidos acima
 holiday,
 workingday
 FROM capital_share_bike_case
-WHERE holiday = 0 OR workingday = 0  -- puxando apenas os dias que são feriados OU não são dias úteis (workingday = 1), e é possível adaptar essa combinação da forma que desejar, sempre assumindo 0 como true e 1 como false
+WHERE holiday = 1 OR workingday = 1  -- puxando apenas os dias que são feriados OU são dias úteis, e é possível adaptar essa combinação da forma que desejar e que for sustentada pela legenda de cada campo no schema do dataset.
 GROUP BY holiday, workingday -- agrupando por feriado e dia útil para ver as diferenças nas médias
 ORDER BY avg_total_rentals DESC; -- ordenando pela média total de aluguéis
 
