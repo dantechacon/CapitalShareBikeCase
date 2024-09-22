@@ -18,7 +18,7 @@ Exemplo: CASE WHEN weather = 1 THEN 'Ensolarado' ... foi aplicado para tornar gr
 
 - Filtragem por Feriados e Dias Úteis:
 Tem como objetivo criar filtros que extraem apenas os registros de dias que são feriados ou dias úteis.
-Código: Foi utilizado WHERE holiday = 0 OR workingday = 0 para filtrar os dias relevantes para análise.
+Código: Foi utilizado WHERE holiday = 1 OR workingday = 1 para filtrar os dias relevantes para análise.
 
 # Principais Insights
 - Clima Ensolarado é o Favorito: O tempo ensolarado tem o maior número de locações, tanto por mensalistas quanto por usuários casuais.
