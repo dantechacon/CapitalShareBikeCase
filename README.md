@@ -5,19 +5,19 @@ Este repositório contém análises e queries SQL desenvolvidas para explorar os
 As queries desenvolvidas cobrem diferentes aspectos dos dados, como:
 
 - Transformação de Colunas datetime:
-Objetivo: Separar a coluna datetime original em duas colunas distintas (date e time), facilitando a análise de padrões temporais como sazonalidade, dias da semana e horários de pico.
+Tem como objetivo separar a coluna datetime original em duas colunas distintas (date e time), facilitando a análise de padrões temporais como sazonalidade, dias da semana e horários de pico.
 Código: O SQL inclui a função EXTRACT() para extrair e agrupar dados por dia, mês, ano, hora e outros períodos de interesse.
 
 - Tratamento de Colunas Redundantes:
-Objetivo: Remover colunas duplicadas que representavam a mesma informação, como a coluna Temperatura e temp, para evitar redundância nos dados.
+Tem como objetivo remover colunas duplicadas que representavam a mesma informação, como a coluna Temperatura e temp, para evitar redundância nos dados.
 Código: A coluna foi removida utilizando ALTER TABLE ... DROP COLUMN.
 
 - Mapeamento de Valores Numéricos:
-Objetivo: Substituir valores numéricos de colunas como season e weather por seus respectivos nomes, usando a função CASE WHEN. Isso melhora a legibilidade dos dados.
+Tem como objetivo substituir valores numéricos de colunas como season e weather por seus respectivos nomes, usando a função CASE WHEN. Isso melhora a legibilidade dos dados.
 Exemplo: CASE WHEN weather = 1 THEN 'Ensolarado' ... foi aplicado para tornar gráficos e relatórios mais compreensíveis.
 
 - Filtragem por Feriados e Dias Úteis:
-Objetivo: Criar filtros que extraem apenas os registros de dias que são feriados ou dias úteis.
+Tem como objetivo criar filtros que extraem apenas os registros de dias que são feriados ou dias úteis.
 Código: Foi utilizado WHERE holiday = 0 OR workingday = 0 para filtrar os dias relevantes para análise.
 
 # Principais Insights
