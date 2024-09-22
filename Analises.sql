@@ -92,5 +92,40 @@ WHERE holiday = 1 OR workingday = 1  -- puxando apenas os dias que são feriados
 GROUP BY holiday, workingday -- agrupando por feriado e dia útil para ver as diferenças nas médias
 ORDER BY avg_total_rentals DESC; -- ordenando pela média total de aluguéis
 
+/* Resumo dos campos mais relevantes trazidos nas seleções das queries anteriores, mas trazendo volumetria total de locações, ou seja, soma, mas poderia trazer agregação com average como foi trazido anteriormente */
+SELECT 
+EXTRACT(YEAR FROM data) AS ano, -- extraindo o ano da coluna 'data'
+EXTRACT(MONTH FROM data) AS mes, -- extraindo o mês
+CASE 
+  WHEN season = 1 THEN 'Inverno'
+  WHEN season = 2 THEN 'Primavera'
+  WHEN season = 3 THEN 'Verão'
+  WHEN season = 4 THEN 'Outono'
+END AS estacao, -- trazendo os nomes correspondentes de cada season
+CASE 
+  WHEN holiday = 1 THEN 'Feriado'
+  ELSE 'dia comum'
+END AS feriado, -- traz o valor numérico de 'holiday' para uma string legível
+CASE 
+  WHEN workingday = 0 THEN 'Fim de Semana ou Feriado'
+  ELSE 'dia útil'
+END AS dia_trabalho, -- traz o valor de 'workingday' para uma string legível
+CASE 
+  WHEN weather = 1 THEN 'Ensolarado'
+  WHEN weather = 2 THEN 'Nublado'
+  WHEN weather = 3 THEN 'Chovendo'
+  WHEN weather = 4 THEN 'Nevasca'
+END AS clima, -- traz os nomes correspondentes de cada clima, de acordo com o padrão numérico e legenda no schema bd
+ROUND(AVG(temp), 2) AS temp_media, -- média da temperatura
+ROUND(AVG(atemp), 2) AS sensacao_termica_media, -- média da sensação térmica
+ROUND(AVG(humidity), 2) AS umidade_media, -- média da umidade
+ROUND(AVG(windspeed), 2) AS velocidade_vento_media, -- média da velocidade do vento
+SUM(casual) AS total_casual, -- total de aluguéis não mensalistas (casual)
+SUM(registered) AS total_registered, -- total de aluguéis mensalistas (registered)
+SUM(count) AS total_alugueis -- total geral de aluguéis
+FROM tabela_bikes
+GROUP BY ano, mes, estacao, feriado, dia_trabalho, clima
+ORDER BY ano, mes;
+
 
 
